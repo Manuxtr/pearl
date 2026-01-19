@@ -1,27 +1,29 @@
-import { Text, View,Image,TouchableOpacity } from "react-native";
+import { Text, View,Image,TouchableOpacity,ImageBackground } from "react-native";
 import { appStyles } from "../utilities/mainstyles";
+import { Link } from "expo-router";
 
 export default function Index() {
   return (
     <View style={appStyles.wrapper}>
       {/* header */}
-      <View>
+      <ImageBackground source={require("../assets/images/homepage.jpg")}
+      style={appStyles.imgView}>
+
+       <View>
        <Text style={appStyles.HeaderText}>Pearl Hospitality</Text>
       </View>
-      {/* middle content */}
-      <View style={appStyles.imgView}>
-        <Image
-        source={require("../assets/images/homepage.jpg")}
-        style={appStyles.img}
-        />
-        <Text>At Pearl Hospitality Your comfort is our priority. Enjoy a luxurious stay with us.</Text>
-      </View>
-      {/* bottom */}
       <View>
-        <TouchableOpacity>
-          <Text>Get Started</Text>
-        </TouchableOpacity>
+        <Text style={appStyles.imgtext}>At Pearl Hospitality Your comfort is our priority. Enjoy a luxurious stay with us.</Text>
       </View>
+      </ImageBackground>
+      {/* bottom */}
+     
+        <Link href="/(tabs)/home">
+           <View style={appStyles.getstartedView}>
+            <Text style={appStyles.imgtext}>Get Started</Text>
+           </View>
+        </Link>
+     
     </View>
   );
 }
