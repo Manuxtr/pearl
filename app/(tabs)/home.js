@@ -13,6 +13,7 @@ import { appColors } from "../../utilities/apptheme";
 import { myEvents } from "../../assets/localdata/hotelevents";
 import { Seperator } from "../../components/seperator";
 import { Link } from "expo-router";
+import FontAwesome from '@expo/vector-icons/FontAwesome';
 
 export default function Home() {
   return (
@@ -32,7 +33,7 @@ export default function Home() {
                 />
               </TouchableOpacity>
             </View>
-            <Text style={appStyles.headerText3}>Accomdations</Text>
+            
             <View style={{ justifyContent: "center", alignItems: "center" }}>
               <View style={{ flexDirection: "row", gap: 10 }}>
                 <TextInput placeholder="SEARCH ROOMS" style={appStyles.input} />
@@ -45,6 +46,7 @@ export default function Home() {
                 </TouchableOpacity>
               </View>
             </View>
+            <Text style={appStyles.headerText3}>Accomdations</Text>
           </View>
           <View style={{ marginTop: 20, marginBottom: 550 }}>
             <FlatList
@@ -53,20 +55,27 @@ export default function Home() {
               renderItem={({ item }) => {
                 return (
                   <Link href={"(tabs)/addguest"}>
-                    <View style={{ flex: 1 }}>
+                    <View style={appStyles.cardView}>
                       {/* IMAGE VIEW */}
-                      <View>
+                      <View style={appStyles.flatimgView} >
                         <Image source={item.imgUrl} style={appStyles.flatimg} />
                       </View>
                       {/* ROOM PROP */}
                       <View>
                         <View style={appStyles.propView}>
-                          <Text style={appStyles.roomtype}>
+                          <View>
+                            <Text style={appStyles.roomtype}>
                             {item.roomtype}
-                          </Text>
-                          <Text style={appStyles.price}>{item.price}</Text>
+                           </Text>
+                          </View>
+                          <View style={{flexDirection:"row",justifyContent:"center",alignItems:"center",gap:5}}>
+                              <FontAwesome name="star-o" size={24} color="black" />
+                              <Text>{item.rating}</Text>
+                          </View>
                         </View>
-                        <Text style={appStyles.desc}>{item.description}</Text>
+                          <Text style={appStyles.desc}>{item.description}</Text>
+                         <Text style={appStyles.price}>{item.price}</Text>
+                      
                       </View>
                     </View>
                   </Link>

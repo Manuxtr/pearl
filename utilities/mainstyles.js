@@ -82,11 +82,24 @@ export const appStyles = StyleSheet.create({
     },
     flatimg:{
         width:screenWidth.width,
-        height:430,
-        paddingBottom:50
+        height:290,
+        paddingBottom:50,
+      
+       
+
+    },
+    flatimgView:{
+        borderTopLeftRadius:15,
+        borderTopRightRadius:15,
+        overflow:"hidden"
+
     },
     propView:{
-        display:"flex",flexDirection:"row",justifyContent:"space-between",alignItems:"center"
+        display:"flex",
+        flexDirection:"row",
+        justifyContent:"space-between",
+        alignItems:"center",
+        paddingHorizontal:20
     },
     roomtype:{
         fontSize:18,
@@ -106,6 +119,14 @@ export const appStyles = StyleSheet.create({
         fontFamily:""
 
         
+    },
+    cardView:{
+        flex:1,
+        backgroundColor:appColors.lielac,
+        borderRadius:15,
+        height:420,
+        overflow:"hidden"
+     
     }
    
 

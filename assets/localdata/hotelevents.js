@@ -6,6 +6,7 @@ export const myEvents =[
         price:"$150",
         imgUrl: require("../images/deluxe single.jpg"),
         isAvaliable:true,
+        rating:4.5
     },
 
     {
@@ -15,6 +16,7 @@ export const myEvents =[
         price:"$500",
         imgUrl: require("../images/deluxe extra.jpg"),
         isAvaliable:true,
+         rating:4.1
     },
 
     {
@@ -24,6 +26,7 @@ export const myEvents =[
         price:"$100",
         imgUrl: require("../images/deluxe small.jpg"),
         isAvaliable:true,
+         rating:4.1
     },
 
     {
@@ -33,6 +36,7 @@ export const myEvents =[
         price:"$200",
         imgUrl: require("../images/deluxe suite.jpg"),
         isAvaliable:true,
+         rating:4.5
     },
 
     {
@@ -42,6 +46,7 @@ export const myEvents =[
         price:"$250",
         imgUrl: require("../images/deluxeroom.jpg"),
         isAvaliable:true,
+         rating:4.3
     },
 
     {
@@ -51,6 +56,7 @@ export const myEvents =[
         price:"$450",
         imgUrl: require("../images/executive single.jpg"),
         isAvaliable:true,
+         rating:4.0
     },
 
     {
@@ -60,6 +66,7 @@ export const myEvents =[
         price:"$500",
         imgUrl: require("../images/windowview.jpg"),
         isAvaliable:true,
+         rating:5
     },
 
     {
@@ -69,6 +76,7 @@ export const myEvents =[
         price:"$140",
         imgUrl: require("../images/suite.jpg"),
         isAvaliable:true,
+         rating:4.7
     },
 
     {
@@ -78,6 +86,7 @@ export const myEvents =[
         price:"$1000",
         imgUrl: require("../images/executive.jpg"),
         isAvaliable:true,
+        rating:5
     },
     // {
         
