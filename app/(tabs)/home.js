@@ -50,6 +50,7 @@ export default function Home() {
           </View>
           <View style={{ marginTop: 20, marginBottom: 550 }}>
             <FlatList
+            keyExtractor={(item) => item.id }
               data={myEvents}
               ItemSeparatorComponent={Seperator}
               renderItem={({ item }) => {
