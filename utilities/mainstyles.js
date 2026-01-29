@@ -83,7 +83,7 @@ export const appStyles = StyleSheet.create({
     flatimg:{
         width:screenWidth.width,
         height:290,
-        paddingBottom:50,
+        // paddingBottom:50,
       
        
 
@@ -99,7 +99,7 @@ export const appStyles = StyleSheet.create({
         flexDirection:"row",
         justifyContent:"space-between",
         alignItems:"center",
-        paddingHorizontal:20
+        paddingHorizontal:12
     },
     roomtype:{
         fontSize:18,
@@ -114,9 +114,10 @@ export const appStyles = StyleSheet.create({
 
     },
     desc:{
-        fontSize:18,
-        fontWeight:"600",
-        fontFamily:""
+        fontSize:13,
+        fontWeight:"800",
+        fontFamily:"Relyne-Regular",
+        textAlign:"justify"
 
         
     },
@@ -127,7 +128,92 @@ export const appStyles = StyleSheet.create({
         height:420,
         overflow:"hidden"
      
+    },
+    ctaView:{
+        flexDirection:"row",
+        justifyContent:"space-between",
+        alignItems:"center",
+        paddingHorizontal:12,
+        marginBottom:70       
+
+    },
+    ctabtn:{
+        width:100,
+        height:30,
+        backgroundColor:appColors.blue,
+        justifyContent:"center",
+        alignItems:"center",
+        borderRadius:10,
+      
+    },
+    // form styles
+    topviewC:{
+        padding:20
+    },
+    title:{
+        fontSize:26,
+        fontWeight:"700",
+        fontFamily:"Relyne-Regular"
+    },
+    subtitle:{
+        fontSize:18,
+        fontFamily:"Chubsy Snack",
+        color:appColors.darkgray
+    },
+    form:{
+        backgroundColor:appColors.white,
+        paddingHorizontal:20
+
+    },
+    formInput:{
+        flex:1,
+        height:50,
+        borderWidth:1,
+        borderColor:appColors.darkgray,
+        width:"100%",
+        borderRadius:10,
+        marginTop:20
+
+
+    },
+    guestImg:{
+        justifyContent:"center",
+        alignItems:"center",
+        alignSelf:"center",
+        backgroundColor:appColors.purple,
+        height:100,
+        width:100,
+        borderRadius:50,
+        marginBottom:10
+    },
+    ctaAdd:{
+        justifyContent:"center",
+        alignItems:"center",
+        alignSelf:"center",
+        height:50,
+        width:"50%",
+        backgroundColor:appColors.purple,
+        borderRadius:8,
+        marginTop:10
+    },
+    priceView:{
+        width:90,
+        height:20,
+        backgroundColor:appColors.purple,
+        marginTop:20,
+        justifyContent:"center",
+        alignItems:"center",
+        alignSelf:"center",
+        borderRadius:17
+
+    },
+    priceText:{
+        color:"white",
+        fontSize:12,
+        fontWeight:"800"
     }
+    
+
    
 
 })

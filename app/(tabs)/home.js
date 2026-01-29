@@ -5,6 +5,7 @@ import {
   TextInput,
   FlatList,
   Image,
+  Pressable
 } from "react-native";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import Ionicons from "@expo/vector-icons/Ionicons";
@@ -12,10 +13,18 @@ import { appStyles } from "../../utilities/mainstyles";
 import { appColors } from "../../utilities/apptheme";
 import { myEvents } from "../../assets/localdata/hotelevents";
 import { Seperator } from "../../components/seperator";
-import { Link } from "expo-router";
+import { Link ,useLocalSearchParams} from "expo-router";
 import FontAwesome from '@expo/vector-icons/FontAwesome';
+import { useState } from "react";
 
 export default function Home() {
+
+  const [selectedText,setSelectedText]  = useState()
+ 
+
+
+
+
   return (
     <SafeAreaProvider>
       <SafeAreaView>
@@ -55,7 +64,7 @@ export default function Home() {
               ItemSeparatorComponent={Seperator}
               renderItem={({ item }) => {
                 return (
-                  <Link href={"(tabs)/addguest"}>
+                 
                     <View style={appStyles.cardView}>
                       {/* IMAGE VIEW */}
                       <View style={appStyles.flatimgView} >
@@ -74,12 +83,31 @@ export default function Home() {
                               <Text>{item.rating}</Text>
                           </View>
                         </View>
-                          <Text style={appStyles.desc}>{item.description}</Text>
-                         <Text style={appStyles.price}>{item.price}</Text>
+                         <View style={{paddingHorizontal:12}}>
+                          <Pressable onPress={() => setSelectedText(!selectedText)}>
+                            {selectedText ? <Text style={appStyles.desc}>{item.description}...less</Text>
+
+                            :
+                            <Text style={appStyles.desc}>{item.description.slice(0,50)}...more</Text>
+                            
+                            }
+                          </Pressable>
+                         </View>
+                         <View style={appStyles.ctaView}>
+                           <Text style={appStyles.price}>{item.price}</Text>
+                           <Link href={{
+                            pathname:"(tabs)/addguest",
+                            params:{roomType:item.roomtype}
+                           }}>
+                              <View style={appStyles.ctabtn}>
+                                <Text style={{fontSize:14,color:"white"}}>{item.cta}</Text>
+                              </View>
+                           </Link>
+                         </View>
                       
                       </View>
                     </View>
-                  </Link>
+                 
                 );
               }}
             />

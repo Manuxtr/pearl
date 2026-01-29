@@ -4,7 +4,7 @@ import { SafeAreaProvider } from "react-native-safe-area-context";
 import { ActivityIndicator } from "react-native";
 
 export default function RootLayout() {
-  
+
   const [myfonts] = useFonts({
     "Chiqueta-Regular": require("../assets/fonts/Chiqueta-Regular.ttf"),
     "Chubsy Snack": require("../assets/fonts/Chubsy Snack.otf"),
@@ -14,7 +14,7 @@ export default function RootLayout() {
   });
   console.log("my fonts",myfonts)
   if (!myfonts) {
-    return <ActivityIndicator size={"small"}color={"red"}/>
+    return <ActivityIndicator size={"small"}color={"red"} style={{justifyContent:"center",alignItems:"center"}}/>
   }
 
   return (

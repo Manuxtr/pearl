@@ -4,5 +4,8 @@ export const appColors = {
     purple:"#9B5DE0",
     lielac:"#D78FEE",
     pink:"#FDCFFA",
+    darkgray:"#6B7280",
+    gray:"gray",
+    white:"#FFFFFF"
 }
 
