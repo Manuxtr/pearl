@@ -13,7 +13,7 @@ import { appStyles } from "../../utilities/mainstyles";
 import { appColors } from "../../utilities/apptheme";
 import { myEvents } from "../../assets/localdata/hotelevents";
 import { Seperator } from "../../components/seperator";
-import { Link ,useLocalSearchParams} from "expo-router";
+import { Link } from "expo-router";
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { useState } from "react";
 

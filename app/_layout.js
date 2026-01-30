@@ -1,4 +1,4 @@
-import { Redirect, Stack } from "expo-router";
+import {  Stack } from "expo-router";
 import { useFonts } from "expo-font";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { ActivityIndicator } from "react-native";

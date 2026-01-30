@@ -14,7 +14,7 @@ import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { useState } from "react";
 import { myEvents } from "../../assets/localdata/hotelevents";
 import { userGender } from "../../components/gender";
-import { DateTimePickerAndroid } from "@react-native-community/datetimepicker";
+// import { DateTimePickerAndroid } from "@react-native-community/datetimepicker";
 import RNPickerSelect from "react-native-picker-select"
 import { useLocalSearchParams } from "expo-router";
 
@@ -30,8 +30,8 @@ export default function AddGuest() {
   const [gender,setGender] = useState("")
     const {roomType} = useLocalSearchParams()
   const [rooms,setRooms] = useState(roomType || "")
-  const [date,setDate] = useState(new Date())
-  const [showpicker,setShowPicker] = useState(false)
+  // const [date,setDate] = useState(new Date())
+  // const [showpicker,setShowPicker] = useState(false)
 
   
 
@@ -137,7 +137,7 @@ export default function AddGuest() {
                 placeholderTextColor={appColors.gray}
                 style={appStyles.formInput}
                 value={nokphone}
-                onChangeText={(value) => setNok(value)}
+                onChangeText={(value) => setNokPhone(value)}
               />
 
               <TouchableOpacity>

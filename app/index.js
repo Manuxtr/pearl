@@ -1,4 +1,4 @@
-import { Text, View,Image,TouchableOpacity,ImageBackground } from "react-native";
+import { Text, View,ImageBackground } from "react-native";
 import { appStyles } from "../utilities/mainstyles";
 import { Link } from "expo-router";
 
