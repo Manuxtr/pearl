@@ -211,6 +211,26 @@ export const appStyles = StyleSheet.create({
         color:"white",
         fontSize:12,
         fontWeight:"800"
+    },
+    Date:{display:"flex",
+        flexDirection:"row",
+        marginBottom:10,
+        marginTop:10,
+        gap:10
+     
+    },
+    checkin:{
+        fontSize:13,
+        fontFamily:"Chubsy Snack",
+        textAlign:"center",
+        marginTop:12
+    },
+    datetext:{
+        textAlign:"center",
+        fontSize:14,
+        fontFamily:"Relyne-Regular",
+        fontWeight:"800",
+        
     }
     
 

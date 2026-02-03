@@ -17,9 +17,23 @@ import { Link } from "expo-router";
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { useState } from "react";
 
+
+
+
+
+
 export default function Home() {
 
   const [selectedText,setSelectedText]  = useState()
+ 
+
+    
+
+  
+  // Function to get filtered/sorted data
+
+
+
  
 
 
@@ -46,7 +60,7 @@ export default function Home() {
             <View style={{ justifyContent: "center", alignItems: "center" }}>
               <View style={{ flexDirection: "row", gap: 10 }}>
                 <TextInput placeholder="SEARCH ROOMS" style={appStyles.input} />
-                <TouchableOpacity>
+                <TouchableOpacity onPress={() => handleFilter}>
                   <Ionicons
                     name="filter-circle"
                     size={44}
