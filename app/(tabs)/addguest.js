@@ -22,7 +22,7 @@ import { useLocalSearchParams } from "expo-router";
 import * as ImagePicker from 'expo-image-picker';
 import { Image } from "react-native";
 import {db} from "../../config/firebase_config"
-import { doc,addDoc,collection } from "firebase/firestore";
+import { addDoc,collection } from "firebase/firestore";
 
 
 export default function AddGuest() {
@@ -43,18 +43,8 @@ const [checkOutDate,setCheckOutDate] = useState(new Date())
 const [isLoading,setIsLoading] = useState(false)
 
 
-// tracking checkin date
 
 
-// tracking checkout date
-const onChangeCheckout = (event,selectedDate) => {
-  const currentDate = selectedDate || checkOutDate
-  setCheckOutDate(currentDate)
-  if(event.type === "set"){
-    showTimepicker(false)
-    
-  }
-}
 
 // date picker
 
