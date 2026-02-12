@@ -412,5 +412,12 @@ export const appStyles = StyleSheet.create({
   listitems:{
      padding: 15,
      paddingBottom: 100,
+  },
+  // call to action
+  actionsection:{
+    display:"flex",
+    flexDirection:"row",
+    justifyContent:"space-around",
+    marginTop:10
   }
 });

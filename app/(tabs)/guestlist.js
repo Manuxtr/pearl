@@ -40,11 +40,13 @@ export default function GuestList() {
             id: doc.id,
             ...doc.data(),
           });
+          
           setGuests(guessListData);
           setFilteredGuests(guessListData);
           setIsLoading(false);
           setRefreshing(false);
         });
+        console.log(">>>>>",guessListData)
       });
     } catch (error) {
       Alert.alert("Error fetching guests data", error.message);
@@ -176,10 +178,10 @@ export default function GuestList() {
             <Text style={appStyles.checklabel}>Check in</Text>
             <Text style={appStyles.dateValue}>{formatDateTime(item.checkInDate)}</Text>
           </View>
-          <FontAwesome name="arrow-circle-o-right" size={24} color="black" />
+          <View style={{paddingRight:40}}><FontAwesome name="arrow-circle-o-right" size={24} color="black" /></View>
           <View style={appStyles.datecolumn}>
             <Text style={appStyles.checklabel}>Check Out</Text>
-            <Text>{formatDateTime(item.checkOutDate)}</Text>
+            <Text style= {appStyles.dateValue}>{formatDateTime(item.checkOutDate)}</Text>
           </View>
         </View>
         {/* nok */}
