@@ -51,6 +51,10 @@ export default function RootLayout() {
           headerShown:false
         }}
         />
+        <Stack.Screen
+        name="(updateguests)/[uid]"
+        options={{headerShown:false,title:"update guests"}}
+        />
       </Stack>
     </SafeAreaProvider>
   );
