@@ -4,6 +4,7 @@ import FontAwesome from "@expo/vector-icons/FontAwesome";
 import Entypo from "@expo/vector-icons/Entypo";
 import { appColors } from "../../utilities/apptheme";
 import { appStyles } from "../../utilities/mainstyles";
+import { Link } from "expo-router";
 
 export default function Settings() {
   return (
@@ -30,6 +31,10 @@ export default function Settings() {
                 <Entypo name="log-out" size={32} color={appColors.purple} />
               </TouchableOpacity>
             </View>
+
+            <Link href={"/signup"}>
+            <Text>GO TO SIGNUP</Text>
+            </Link>
           </View>
         </View>
       </SafeAreaView>

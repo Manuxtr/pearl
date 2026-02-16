@@ -419,5 +419,50 @@ export const appStyles = StyleSheet.create({
     flexDirection:"row",
     justifyContent:"space-around",
     marginTop:10
+  },
+
+  // signup
+  signupView:{
+    // display:"flex",
+    // justifyContent:"center",
+    // alignItems:"center",
+    marginTop:  30
+  },
+  google:{
+    display:"flex",
+    flexDirection:"row",
+    alignItems:"center",
+    justifyContent:"center",
+   
+  },
+  orsection:{
+    display:"flex",
+    flexDirection:"row",
+    justifyContent:"space-evenly",
+    alignItems:"center"
+
+  },
+  line:{
+    width:"30%",
+    borderTopWidth:1,
+    borderTopColor:appColors.purple
+  },
+  ortext:{
+    fontSize:16,
+    color:appColors.purple,
+    fontWeight:"500"
+
+  },
+  inputform:{
+    paddingHorizontal:20,
+    gap:20
+  },
+  signupinput:{
+    borderWidth:1,
+    width:400,
+    height:40,
+    borderRadius:15,
+    borderColor:appColors.purple
+
   }
 });

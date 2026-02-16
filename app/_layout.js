@@ -35,6 +35,22 @@ export default function RootLayout() {
             headerShown: false,
           }}
         />
+
+        <Stack.Screen
+        name="signin"
+        options={{
+          title:"sign in",
+          headerShown:false
+        }}
+        />
+
+        <Stack.Screen
+        name="signup"
+        options={{
+          title:"signup",
+          headerShown:false
+        }}
+        />
       </Stack>
     </SafeAreaProvider>
   );
