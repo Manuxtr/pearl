@@ -53,8 +53,11 @@ export default function RootLayout() {
         />
         <Stack.Screen
         name="(updateguests)/[uid]"
-        options={{headerShown:false,title:"update guests"}}
+        options={{title:"update",
+          headerShown:false
+        }}
         />
+       
       </Stack>
     </SafeAreaProvider>
   );

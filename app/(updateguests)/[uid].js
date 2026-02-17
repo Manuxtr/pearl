@@ -1,28 +1,28 @@
-import FontAwesome from "@expo/vector-icons/FontAwesome";
-import { DateTimePickerAndroid } from "@react-native-community/datetimepicker";
-import * as ImagePicker from "expo-image-picker";
-import { useLocalSearchParams } from "expo-router";
-import { doc, getDoc, updateDoc } from "firebase/firestore";
-import { useEffect, useState } from "react";
 import {
-    ActivityIndicator,
-    Alert,
-    Image,
-    KeyboardAvoidingView,
-    Platform,
-    ScrollView,
-    Text,
-    TextInput,
-    TouchableOpacity,
-    View,
+  KeyboardAvoidingView,
+  ScrollView,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+  Platform,
+  Alert,
+  ActivityIndicator,
 } from "react-native";
-import RNPickerSelect from "react-native-picker-select";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
+import { appStyles } from "../../utilities/mainstyles";
+import { appColors } from "../../utilities/apptheme";
+import FontAwesome from "@expo/vector-icons/FontAwesome";
+import { useEffect, useState } from "react";
 import { myEvents } from "../../assets/localdata/hotelevents";
 import { userGender } from "../../components/gender";
+import { DateTimePickerAndroid } from "@react-native-community/datetimepicker";
+import RNPickerSelect from "react-native-picker-select";
+import { useLocalSearchParams } from "expo-router";
+import * as ImagePicker from "expo-image-picker";
+import { Image } from "react-native";
 import { db } from "../../config/firebase_config";
-import { appColors } from "../../utilities/apptheme";
-import { appStyles } from "../../utilities/mainstyles";
+import { addDoc, collection, doc, getDoc, updateDoc } from "firebase/firestore";
 
 export default function UpdateGuest() {
   const [firstname, setFirstName] = useState("");
@@ -39,38 +39,6 @@ export default function UpdateGuest() {
   const [checkInDate, setCheckInDate] = useState(new Date());
   const [checkOutDate, setCheckOutDate] = useState(new Date());
   const [isLoading, setIsLoading] = useState(false);
-
-  // query db for guest info
-  useEffect(() => {
-    const GetGuestRecords = async () => {
-      try {
-        setIsLoading(true);
-        const docRef = doc(db, "guests", uid);
-        const docSnap = await getDoc(docRef);
-        if (docSnap.exists()) {
-          const data = docSnap.data();
-          setFirstName(data.firstname);
-          setLastName(data.lastname);
-          setEmail(data.email);
-          setPhone(data.phone);
-          setAdress(data.address);
-          setNok(data.nok);
-          setNokPhone(data.nokphone);
-          setGender(data.gender);
-          setRooms(data.rooms);
-          setProfileImage(data.profileImage);
-          setCheckInDate(data.date ? new Date() : new Date());
-          setCheckOutDate(data.date ? new Date() : new Date());
-        } else {
-          Alert.alert("error", "cant find guest data");
-        }
-      } catch (error) {
-        Alert.alert("error", "an error occured ", error);
-      }
-      setIsLoading(false);
-    };
-    GetGuestRecords();
-  }, [uid]);
 
   // date picker
 
@@ -137,13 +105,45 @@ export default function UpdateGuest() {
     }
   };
 
+  // get guest data
+  useEffect(() => {
+    const Getguestdata = async () => {
+      try {
+        setIsLoading(true);
+        const docRef = doc(db, "guests", uid);
+        const docSnap = await getDoc(docRef);
+
+        if (docSnap.exists()) {
+          const data = docSnap.data();
+          setFirstName(data.firstname);
+          setLastName(data.lastname);
+          setEmail(data.email);
+          setPhone(data.phone);
+          setAdress(data.address);
+          setNok(data.nok);
+          setNokPhone(data.nokphone);
+          setRooms(data.rooms);
+          setCheckInDate(data.date ? new Date() : new Date());
+          setCheckOutDate(data.date ? new Date() : new Date());
+          setProfileImage(data.profileImage);
+        } else {
+          Alert.alert("error", "no guest data found");
+        }
+      } catch (error) {
+        Alert.alert("error", "an error occured try again", error);
+      }
+      setIsLoading(false);
+    };
+    Getguestdata();
+  }, [uid]);
+
   // save to database
 
-  const handleAddguest = async () => {
+  const handleUpdateguest = async () => {
     if (
       !firstname.trim() ||
       !lastname.trim() ||
-      !gender.trim() ||
+      !gender ||
       !rooms.trim() ||
       !email.trim() ||
       !phone.trim() ||
@@ -151,10 +151,11 @@ export default function UpdateGuest() {
       !nok.trim() ||
       !nokphone.trim()
     ) {
-      Alert.alert("error", "Please fill all the fields");
+      Alert.alert("Error", "Please fill all the fields");
       return;
     }
     try {
+      
       const selectedRoom = myEvents.find((event) => event.roomtype === rooms);
       const roomPrice = selectedRoom?.price || 0;
       const imageUri = profileImage ? profileImage : "";
@@ -176,32 +177,15 @@ export default function UpdateGuest() {
         createdAt: new Date().getTime(),
       };
       setIsLoading(true);
-      await updateDoc(doc(db, "guests", uid), guestData);
+      const docRef = doc(db,"guests",uid)
+      await updateDoc(docRef,guestData);
       Alert.alert(
         "Success",
-        `Guest ${firstname} ${lastname} has been updated sucessfully`,
-        [
-          {
-            text: "Okay",
-            onPress: () => {
-              (setFirstName(""),
-                setLastName(""),
-                setGender(""),
-                setRooms(""),
-                setEmail(""),
-                setAdress(""),
-                setNok(""),
-                setNokPhone(""),
-                setPhone(""),
-                setProfileImage(null));
-              (setCheckInDate(new Date()), setCheckOutDate(new Date()));
-            },
-          },
-        ],
+        "guest updated",
       );
       setIsLoading(false);
     } catch (error) {
-      Alert.alert("error", "error adding guest ", error);
+      console.log("lllll",error)
     }
   };
 
@@ -355,7 +339,7 @@ export default function UpdateGuest() {
                 </View>
               </View>
 
-              <TouchableOpacity onPress={() => handleAddguest()}>
+              <TouchableOpacity onPress={() => handleUpdateguest()}>
                 <View style={appStyles.ctaAdd}>
                   {isLoading ? (
                     <ActivityIndicator size={"small"} color={"white"} />
@@ -367,7 +351,7 @@ export default function UpdateGuest() {
                         fontFamily: "Chubsy Snack",
                       }}
                     >
-                      Update Guest
+                      Add Guest
                     </Text>
                   )}
                 </View>

@@ -3,12 +3,20 @@ import Entypo from "@expo/vector-icons/Entypo";
 import EvilIcons from "@expo/vector-icons/EvilIcons";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { Link } from "expo-router";
-import { collection, onSnapshot, orderBy, query,deleteDoc, doc } from "firebase/firestore";
+import {
+  collection,
+  onSnapshot,
+  orderBy,
+  query,
+  doc,
+  deleteDoc,
+} from "firebase/firestore";
 import { useEffect, useState } from "react";
 import {
   ActivityIndicator,
   Alert,
-  FlatList, RefreshControl,
+  FlatList,
+  RefreshControl,
   Text,
   TextInput,
   TouchableOpacity,
@@ -40,13 +48,13 @@ export default function GuestList() {
             id: doc.id,
             ...doc.data(),
           });
-          
+
           setGuests(guessListData);
           setFilteredGuests(guessListData);
           setIsLoading(false);
           setRefreshing(false);
         });
-        console.log(">>>>>",guessListData)
+        console.log(">>>>>", guessListData);
       });
     } catch (error) {
       Alert.alert("Error fetching guests data", error.message);
@@ -60,19 +68,16 @@ export default function GuestList() {
     };
   }, []);
 
-
   // handling delete on firebase
-
-  const HandleDelete = async (booking) => {
-    setIsLoading(true)
+  const HandleDocDelete = async (guestId) => {
+    setIsLoading(true);
     try {
-      await deleteDoc(doc(db,"guests",booking))
-      Alert.alert("success","document deleted")
+      await deleteDoc(doc(db, "guests", guestId));
+      Alert.alert("success", "guestdata deleted sucessfully");
     } catch (error) {
-      Alert.alert("error","unable to delete documents,try agin",[{text:"Dismiss"}],error)
+      Alert.alert("error", "unable to delete guest data", error);
     }
-    setIsLoading(false)
-  }
+  };
 
   // to handle search query and filter guests list
   useEffect(() => {
@@ -166,7 +171,7 @@ export default function GuestList() {
             <Text style={appStyles.infoText}>{item.phone}</Text>
           </View>
           {item.address ? (
-            <View style={{flexDirection:"row",gap:8}}>
+            <View style={{ flexDirection: "row", gap: 8 }}>
               <Entypo name="address" size={24} color="black" />
               <Text style={appStyles.infoText} numberOfLines={1}>
                 {item.address}
@@ -190,12 +195,18 @@ export default function GuestList() {
         <View style={appStyles.datesection}>
           <View style={appStyles.datecolumn}>
             <Text style={appStyles.checklabel}>Check in</Text>
-            <Text style={appStyles.dateValue}>{formatDateTime(item.checkInDate)}</Text>
+            <Text style={appStyles.dateValue}>
+              {formatDateTime(item.checkInDate)}
+            </Text>
           </View>
-          <View style={{paddingRight:40}}><FontAwesome name="arrow-circle-o-right" size={24} color="black" /></View>
+          <View style={{ paddingRight: 40 }}>
+            <FontAwesome name="arrow-circle-o-right" size={24} color="black" />
+          </View>
           <View style={appStyles.datecolumn}>
             <Text style={appStyles.checklabel}>Check Out</Text>
-            <Text style= {appStyles.dateValue}>{formatDateTime(item.checkOutDate)}</Text>
+            <Text style={appStyles.dateValue}>
+              {formatDateTime(item.checkOutDate)}
+            </Text>
           </View>
         </View>
         {/* nok */}
@@ -209,19 +220,17 @@ export default function GuestList() {
         ) : null}
         {/* delete and edit */}
         <View style={appStyles.actionsection}>
-          <TouchableOpacity onPress={() => HandleDelete(item.id) }>
-            {isLoading ? <ActivityIndicator size={24} color={"red"}/> 
-            
-            :<MaterialCommunityIcons
+          <TouchableOpacity onPress={() => HandleDocDelete(item.id)}>
+            <MaterialCommunityIcons
               name="delete-sweep"
               color={"black"}
               size={24}
-            />}
+            />
           </TouchableOpacity>
+
           <Link href={{
             pathname:"(updateguests)/[uid]",
             params:{uid:item.id}
-
           }}>
             <MaterialCommunityIcons
               name="account-box-edit-outline"
