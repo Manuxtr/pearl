@@ -7,7 +7,8 @@ import {
   View,
   Platform,
   Alert,
-  ActivityIndicator
+  ActivityIndicator,
+  Image
 } from "react-native";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import { appStyles } from "../../utilities/mainstyles";
@@ -20,7 +21,6 @@ import { DateTimePickerAndroid } from "@react-native-community/datetimepicker";
 import RNPickerSelect from "react-native-picker-select"
 import { useLocalSearchParams } from "expo-router";
 import * as ImagePicker from 'expo-image-picker';
-import { Image } from "react-native";
 import {db} from "../../config/firebase_config"
 import { addDoc,collection } from "firebase/firestore";
 
@@ -137,18 +137,18 @@ const showDatepicker = (isCheckIn) => {
        await addDoc(collection(db,"guests"),guestData)
        Alert.alert("Success",`Guest ${firstname} ${lastname} has been added sucessfully`,[{text:"Okay",
         onPress:() => {
-       setFirstName(""),
-       setLastName(""),
-       setGender(""),
-       setRooms(""),
-       setEmail(""),
-       setAdress(""),
-       setNok(""),
-       setNokPhone(""),
-       setPhone(""),
-      setProfileImage(null)
-       setCheckInDate(new Date()),
-       setCheckOutDate(new Date())
+       setFirstName("");
+       setLastName("");
+       setGender("");
+       setRooms("");
+       setEmail("");
+       setAdress("");
+       setNok("");
+       setNokPhone("");
+       setPhone("");
+      setProfileImage(null);
+       setCheckInDate(new Date());
+       setCheckOutDate(new Date());
 
        }}])
         setIsLoading(false)

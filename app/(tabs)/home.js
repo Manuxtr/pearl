@@ -60,7 +60,7 @@ export default function Home() {
             <View style={{ justifyContent: "center", alignItems: "center" }}>
               <View style={{ flexDirection: "row", gap: 10 }}>
                 <TextInput placeholder="SEARCH ROOMS" style={appStyles.input} />
-                <TouchableOpacity onPress={() => handleFilter}>
+                <TouchableOpacity >
                   <Ionicons
                     name="filter-circle"
                     size={44}

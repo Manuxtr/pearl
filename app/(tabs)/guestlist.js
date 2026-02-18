@@ -2,7 +2,7 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import Entypo from "@expo/vector-icons/Entypo";
 import EvilIcons from "@expo/vector-icons/EvilIcons";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
-import { Link } from "expo-router";
+import { Link ,useRouter} from "expo-router";
 import {
   collection,
   onSnapshot,
@@ -34,6 +34,8 @@ export default function GuestList() {
   const [isLoading, setIsLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
   const [refreshing, setRefreshing] = useState(false);
+
+  const router = useRouter()
 
   // to fecth guests data from firebase firestore
   useEffect(() => {
@@ -69,13 +71,16 @@ export default function GuestList() {
   }, []);
 
   // handling delete on firebase
-  const HandleDocDelete = async (guestId) => {
+  const HandleDelete = async (guestId) => {
     setIsLoading(true);
     try {
       await deleteDoc(doc(db, "guests", guestId));
-      Alert.alert("success", "guestdata deleted sucessfully");
+      Alert.alert("Sucess", "Guest data deleted sucessfully");
     } catch (error) {
-      Alert.alert("error", "unable to delete guest data", error);
+      Alert.alert("Error", "An error occured,failed to delete guest data",error);
+      setIsLoading(false)
+      router.back()
+      
     }
   };
 
@@ -220,7 +225,7 @@ export default function GuestList() {
         ) : null}
         {/* delete and edit */}
         <View style={appStyles.actionsection}>
-          <TouchableOpacity onPress={() => HandleDocDelete(item.id)}>
+          <TouchableOpacity onPress={() => HandleDelete(item.id)}>
             <MaterialCommunityIcons
               name="delete-sweep"
               color={"black"}
@@ -228,10 +233,12 @@ export default function GuestList() {
             />
           </TouchableOpacity>
 
-          <Link href={{
-            pathname:"(updateguests)/[uid]",
-            params:{uid:item.id}
-          }}>
+          <Link
+            href={{
+              pathname: "(updateguests)/[uid]",
+              params: { uid: item.id },
+            }}
+          >
             <MaterialCommunityIcons
               name="account-box-edit-outline"
               color={"black"}
@@ -245,12 +252,14 @@ export default function GuestList() {
 
   // render empty state when there is no guest data
   const renderEmptyState = () => {
-    <View style={appStyles.emptyState}>
+    return(
+      <View style={appStyles.emptyState}>
       <Text style={appStyles.emptyStateText}>No guests found</Text>
       <Link href={"/addguest"}>
         <Text>ADD GUEST HERE</Text>
       </Link>
-    </View>;
+    </View>
+    )
   };
 
   return (

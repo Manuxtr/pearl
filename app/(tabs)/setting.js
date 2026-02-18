@@ -4,9 +4,13 @@ import FontAwesome from "@expo/vector-icons/FontAwesome";
 import Entypo from "@expo/vector-icons/Entypo";
 import { appColors } from "../../utilities/apptheme";
 import { appStyles } from "../../utilities/mainstyles";
-import { Link } from "expo-router";
+import {AuthContext} from "../../config/authcontext"
+import { useContext } from "react";
 
 export default function Settings() {
+  const authstate = useContext(AuthContext)
+
+
   return (
     <SafeAreaProvider>
       <SafeAreaView>
@@ -26,15 +30,13 @@ export default function Settings() {
               </Text>
             </View>
             <View style={appStyles.namecard2}>
-              <TouchableOpacity style={{display:"flex",flexDirection:"row",gap:12}}>
+              <TouchableOpacity style={{display:"flex",flexDirection:"row",gap:12}} onPress={authstate.LogOut}>
                 <Text style={{color: "white", fontSize: 20, fontWeight: "600"}}>LogOut</Text>
                 <Entypo name="log-out" size={32} color={appColors.purple} />
               </TouchableOpacity>
             </View>
 
-            <Link href={"/signup"}>
-            <Text>GO TO SIGNUP</Text>
-            </Link>
+           
           </View>
         </View>
       </SafeAreaView>

@@ -1,10 +1,19 @@
-import { Tabs } from "expo-router";
+import { Tabs ,Redirect } from "expo-router";
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import Octicons from '@expo/vector-icons/Octicons';
 import SimpleLineIcons from '@expo/vector-icons/SimpleLineIcons';
 import { appColors } from "../../utilities/apptheme";
+import { useContext } from "react";
+import { AuthContext } from "../../config/authcontext";
 
-export default function _Layouts(){
+export default function TabsLayouts(){
+
+    const authstate = useContext(AuthContext)
+    
+   if(!authstate.isLoggedIn){
+    return(<Redirect href={"/signin"}/>)
+   }
+  
     return(
         <Tabs screenOptions={{
             tabBarActiveTintColor:appColors.lielac
