@@ -7,7 +7,7 @@ import {
 } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
 import { createContext, useEffect, useState } from "react";
-import { SplashScreen, useRouter } from "expo-router";
+import {  useRouter } from "expo-router";
 
 export const AuthContext = createContext({
   isLoggedIn: false,
@@ -27,7 +27,7 @@ export function AuthProvider({ children }) {
   useEffect(() => {
     if (!isReady) return;
     const navigate = async () => {
-      await SplashScreen.hideAsync();
+      
       if (!isLoggedIn) {
         router.replace("/signin");
       } else {
@@ -37,8 +37,9 @@ export function AuthProvider({ children }) {
     navigate();
   }, [isLoggedIn, isReady]);
 
-  // ✅ FIX 1: argument order now matches how SignUp.jsx calls it:
+  
   // authstate.SignUp(values.fullname, values.staffId, values.email, values.password)
+
   const SignUp = async (fullname, staffId, email, password) => {
     console.log("signing up with", email);
     try {
@@ -48,14 +49,14 @@ export function AuthProvider({ children }) {
         password
       );
       const user = userCredential.user;
-      await saveSignupEvent(user, fullname, staffId); // ✅ FIX 3: pass fullname & staffId
+      await saveSignupEvent(user, fullname, staffId); 
       return user;
     } catch (error) {
       console.log("error signing up", error);
-      throw error; // re-throw so Formik catch block receives it
+      throw error; 
     }
   };
-
+// login function
   const LogIn = async (email, password) => {
     console.log("attempt login with", email);
     try {
@@ -73,6 +74,7 @@ export function AuthProvider({ children }) {
     }
   };
 
+  // logout function
   const LogOut = async () => {
     try {
       if (currentUser) {
@@ -84,7 +86,7 @@ export function AuthProvider({ children }) {
     }
   };
 
-  // ✅ FIX 2 & 3: receives fullname & staffId as params, saves them correctly
+//  save signup event to db
   const saveSignupEvent = async (user, fullname, staffId) => {
     try {
       if (user.uid) {
@@ -102,8 +104,8 @@ export function AuthProvider({ children }) {
           {
             email: user.email,
             uid: user.uid,
-            fullname: fullname || null,  // ✅ from param, not user object
-            staffId: staffId || null,    // ✅ from param, not user object
+            fullname: fullname || null,  
+            staffId: staffId || null,    
             createdAt: new Date().getTime(),
           },
           { merge: true }
@@ -113,7 +115,7 @@ export function AuthProvider({ children }) {
       console.log("error saving signup event", error);
     }
   };
-
+// save loginevent to db
   const saveLoginEvent = async (user) => {
     try {
       if (user.uid) {
@@ -140,6 +142,7 @@ export function AuthProvider({ children }) {
     }
   };
 
+  // save logoutevent to db
   const saveLogoutEvent = async (user) => {
     try {
       if (user.uid) {
@@ -163,6 +166,7 @@ export function AuthProvider({ children }) {
     }
   };
 
+// auth persistence
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(firebaseAuth, (user) => {
       console.log("auth state changed", user ? "logged in" : "logged out");
@@ -178,6 +182,7 @@ export function AuthProvider({ children }) {
     return unsubscribe;
   }, []);
 
+  // return the context in provider
   return (
     <AuthContext.Provider value={{ isLoggedIn, isReady, LogIn, LogOut, SignUp }}>
       {children}

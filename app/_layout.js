@@ -1,7 +1,9 @@
-import { Stack ,SplashScreen} from "expo-router";
+import { Stack ,SplashScreen,ErrorBoundary } from "expo-router";
 import { useFonts } from "expo-font";
 import { ActivityIndicator } from "react-native";
 import {AuthProvider} from "../config/authcontext"
+import { useEffect } from "react";
+
 
 
 SplashScreen.preventAutoHideAsync()
@@ -9,12 +11,19 @@ SplashScreen.preventAutoHideAsync()
 export default function RootLayout() {
   const [myfonts] = useFonts({
     "Chiqueta-Regular": require("../assets/fonts/Chiqueta-Regular.ttf"),
-    "Chubsy Snack": require("../assets/fonts/Chubsy Snack.otf"),
+    "Chubsy-Snack": require("../assets/fonts/Chubsy-Snack.otf"),
     LORINE: require("../assets/fonts/LORINE.ttf"),
     "Relyne-Regular": require("../assets/fonts/Relyne-Regular.ttf"),
     Scrakers: require("../assets/fonts/Scrakers.otf"),
+
   });
   console.log("my fonts", myfonts);
+  useEffect(() => {
+    if(myfonts){
+      SplashScreen.hideAsync()
+    }
+  },[myfonts])
+
   if (!myfonts) {
     return (
       <ActivityIndicator
@@ -71,3 +80,4 @@ export default function RootLayout() {
   );
 }
 
+export { ErrorBoundary };

@@ -5,6 +5,7 @@ import {
   TextInput,
   TouchableOpacity,
   Image,
+  ActivityIndicator
 } from "react-native";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { appStyles } from "../utilities/mainstyles";
@@ -12,14 +13,14 @@ import { Link } from "expo-router";
 import { useFormik } from "formik";
 import { useState,useContext } from "react";
 import { AuthContext } from "../config/authcontext";
-import {signUpValidation} from "../components/signupschema"
+
 
 export default function SignUp() {
   const [isLoading,setIsLoading] = useState(false)
   const authstate = useContext(AuthContext)
 
 
-  const {handleChange,handleSubmit,handleBlur,errors,values} = useFormik({
+  const {handleChange,handleSubmit,handleBlur,values} = useFormik({
     initialValues: {fullname:"",staffId:"",email:"",password:"",passwordcomfirmation:""},
     onSubmit:async (values) => {
       setIsLoading(true)
@@ -31,7 +32,7 @@ export default function SignUp() {
         setIsLoading(false)
       }
     },
-    validationSchema:signUpValidation
+    
   })
 
   
@@ -46,7 +47,7 @@ export default function SignUp() {
           <Text style={{ textAlign: "center", marginBottom: 20 }}>
             Create Account
           </Text>
-          <View style={{}}>
+          <View >
             <TouchableOpacity style={appStyles.google}>
               <Image
                 source={require("../assets/images/mygoogle.png")}
@@ -71,7 +72,7 @@ export default function SignUp() {
               onChangeText={handleChange("fullname")}
               onBlur={handleBlur("fullname")}
             />
-            <Text>{errors.fullname}</Text>
+           
             <TextInput
               placeholder="staff id"
               placeholderTextColor={"grey"}
@@ -80,7 +81,7 @@ export default function SignUp() {
               onChangeText={handleChange("staffId")}
               onBlur={handleBlur("staffId")}
             />
-             <Text>{errors.staffId}</Text>
+            
             <TextInput
               placeholder="email"
               placeholderTextColor={"grey"}
@@ -90,7 +91,7 @@ export default function SignUp() {
               onBlur={handleBlur("email")}
 
             />
-             <Text>{errors.email}</Text>
+             
             <TextInput
               placeholder="password"
               placeholderTextColor={"grey"}
@@ -99,7 +100,7 @@ export default function SignUp() {
               onChangeText={handleChange("password")}
               onBlur={handleBlur("password")}
             />
-             <Text>{errors.password}</Text>
+             
             <TextInput
               placeholder="comfirm password"
               placeholderTextColor={"grey"}
@@ -108,10 +109,10 @@ export default function SignUp() {
               onChangeText={handleChange("passwordcomfirmation")}
               onBlur={handleBlur("passwordcomfirmation")}
             />
-             <Text>{errors.passwordcomfirmation}</Text>
+            
             <View style={{ justifyContent: "center", alignItems: "center" }}>
               <TouchableOpacity style={appStyles.ctabtn} onPress={handleSubmit}>
-               {isLoading ? "Siging up" : <Text>SIGN UP</Text>}
+               {isLoading ? ( <ActivityIndicator size={24} color={"red"}/>) : (<Text>SIGN UP</Text>)}
               </TouchableOpacity>
             </View>
             <View style={{ alignItems: "center", justifyContent: "center" }}>

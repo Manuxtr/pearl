@@ -6,37 +6,36 @@ import {
   TouchableOpacity,
   Image,
   Alert,
+  ActivityIndicator,
 } from "react-native";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { appStyles } from "../utilities/mainstyles";
 import { Link } from "expo-router";
 import { useFormik } from "formik";
-import { useState ,useContext} from "react";
+import { useState, useContext } from "react";
 import { AuthContext } from "../config/authcontext";
 
 export default function SignIn() {
-  const [isLoading,setIsLoading] = useState(false)
-  const authstate = useContext(AuthContext)
+  const [isLoading, setIsLoading] = useState(false);
+  const authstate = useContext(AuthContext);
 
-const {handleChange,handleBlur,handleSubmit,errors,values} = useFormik({
-  initialValues:{email:"",password:""},
-  onSubmit:async (values) => {
-    setIsLoading(true)
-    try {
-      await authstate.LogIn(values.email,values.password)
-    } catch (error) {
-      Alert.alert("Error","an error occured,failed to login",error)
-      
-    }finally{
-      setIsLoading(false)
-    }
-  }
-
-})
+  const { handleChange, handleBlur, handleSubmit, values } = useFormik({
+    initialValues: { email: "", password: "" },
+    onSubmit: async (values) => {
+      setIsLoading(true);
+      try {
+        await authstate.LogIn(values.email, values.password);
+      } catch (error) {
+        Alert.alert("Error", "an error occured,failed to login", error);
+      } finally {
+        setIsLoading(false);
+      }
+    },
+  });
 
   return (
     <SafeAreaProvider>
-      <KeyboardAvoidingView >
+      <KeyboardAvoidingView>
         <View style={{ marginTop: 180 }}>
           <Text style={{ textAlign: "center", marginBottom: 20 }}>
             Sign in Account
@@ -66,7 +65,7 @@ const {handleChange,handleBlur,handleSubmit,errors,values} = useFormik({
               onChangeText={handleChange("email")}
               onBlur={handleBlur("email")}
             />
-            <Text>{errors.email}</Text>
+
             <TextInput
               placeholder="password"
               placeholderTextColor={"grey"}
@@ -75,11 +74,14 @@ const {handleChange,handleBlur,handleSubmit,errors,values} = useFormik({
               onChangeText={handleChange("password")}
               onBlur={handleBlur("email")}
             />
-            <Text>{errors.password}</Text>
 
             <View style={{ justifyContent: "center", alignItems: "center" }}>
               <TouchableOpacity style={appStyles.ctabtn} onPress={handleSubmit}>
-                {isLoading ? "Loging in" :<Text>Log In</Text>}
+                {isLoading ? (
+                  <ActivityIndicator size={24} color={"red"} />
+                ) : (
+                  <Text>Log In</Text>
+                )}
               </TouchableOpacity>
             </View>
             <View style={{ alignItems: "center", justifyContent: "center" }}>

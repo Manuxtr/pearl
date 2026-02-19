@@ -66,7 +66,7 @@ export const appStyles = StyleSheet.create({
   },
   headerText3: {
     fontSize: 24,
-    fontFamily: "Chubsy Snack",
+    fontFamily: "Chubsy-Snack",
   },
   flatimg: {
     width: screenWidth.width,
@@ -134,7 +134,7 @@ export const appStyles = StyleSheet.create({
   },
   subtitle: {
     fontSize: 18,
-    fontFamily: "Chubsy Snack",
+    fontFamily: "Chubsy-Snack",
     color: appColors.darkgray,
   },
   form: {
@@ -194,7 +194,7 @@ export const appStyles = StyleSheet.create({
   },
   checkin: {
     fontSize: 13,
-    fontFamily: "Chubsy Snack",
+    fontFamily: "Chubsy-Snack",
     textAlign: "center",
     marginTop: 12,
   },
